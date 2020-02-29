@@ -19,3 +19,4 @@ function findBy(username) {
     return db('users')
     .where(username)
 }
+

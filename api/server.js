@@ -7,6 +7,7 @@ const helmet = require('helmet');
 
 
 const usersRouter = require('../users/router');
+const valuesRouter = require('../values/router');
 
 const server = express();
 
@@ -17,6 +18,7 @@ server.use(helmet());
 
 //routes
 server.use('/api/users', usersRouter);
+server.use('/api/values', valuesRouter);
 
 server.get('/', (req, res) => {
     res.status(200).json({ api: "up"})
