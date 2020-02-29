@@ -12,7 +12,7 @@ function getUsers() {
 
 function addUser(user) {
     return db('users')
-    .insert(user);
+    .insert(user, "id");
 }
 
 function findBy(username) {
