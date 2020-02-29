@@ -1,8 +1,8 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('values').truncate()
-    .then(function () {
+  // return knex('values').truncate()
+    // .then(function () {
       // Inserts seed entries
       return knex('values').insert([
         {id: 1, name: 'Athletic ability', description: 'Get your heartrate up!'},
@@ -12,5 +12,5 @@ exports.seed = function(knex) {
         {id: 5, name: 'Creativity', description: 'Creating, discovering, or inventing things to make a difference in the world'},
         {id: 6, name: 'Independence'},
       ]);
-    });
+    // });
 };
