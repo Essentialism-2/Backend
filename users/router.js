@@ -43,7 +43,7 @@ router.post('/register', (req, res) => {
             })
         })
         .catch(err => {
-            res.status(500).json({ error: "could not add user" })
+            res.status(500).json({ error: err })
         })
 })
 
