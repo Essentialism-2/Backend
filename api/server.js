@@ -1,11 +1,14 @@
+require('dotenv').config();
+
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const server = express();
 
 const usersRouter = require('../users/router');
 
+const server = express();
 
 //middleware
 server.use(express.json());
