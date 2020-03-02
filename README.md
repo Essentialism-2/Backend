@@ -26,6 +26,10 @@ URL: https://buildweek-essentialism.herokuapp.com/
 * GET /api/users/
 > Returns all users
 
+#### DELETE
+* DELETE /api/users/:id
+
+> RETURNS: '1' if deleted successfully, or '0' if unsuccessful.
 
 ***
 

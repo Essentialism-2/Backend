@@ -31,6 +31,7 @@ router.post('/register', (req, res) => {
             .then(user => {
               if(user && bcrypt.compareSync(password, user.password)) {
                 res.status(200).json({
+                  id: user.id,
                   message: `Welcome ${name}`,
                   token: generateToken(user)
                 })
@@ -43,7 +44,7 @@ router.post('/register', (req, res) => {
             })
         })
         .catch(err => {
-            res.status(500).json({ error: err })
+            res.status(500).json({ error: "Could not add user" })
         })
 })
 
@@ -56,6 +57,7 @@ router.post('/login', (req, res) => {
       .then(user => {
         if(user && bcrypt.compareSync(password, user.password)) {
           res.status(200).json({
+            id: user.id,
             message: `Welcome ${user.name}`,
             token: generateToken(user)
           })
@@ -67,6 +69,17 @@ router.post('/login', (req, res) => {
         res.status(500).json({ error: "Could not login" });
       })
   });
+
+  router.delete('/:id', (req, res) => {
+    console.log(req.params.id)
+    Users.remove(req.params.id)
+      .then(deleted => {
+        res.status(200).json(deleted)
+      })
+      .catch(err => {
+        res.status(500).json({ error: "Could not delete user" })
+      })
+  })
 
 module.exports = router;
 
