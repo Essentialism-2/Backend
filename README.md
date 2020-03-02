@@ -29,7 +29,7 @@ URL: https://buildweek-essentialism.herokuapp.com/
 #### DELETE
 * DELETE /api/users/:id
 
-> RETURNS: `User ${req.params.id} successfully deleted`
+> RETURNS: `User {:id} successfully deleted`
 
 ***
 
