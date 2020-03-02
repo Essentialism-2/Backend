@@ -4,19 +4,7 @@
 
 URL: https://buildweek-essentialism.herokuapp.com/
 
-***
 
-##### Current Users
-
-{
-	"username": "test1",
-	"password": "password"
-}
-
-{
-	"username": "test2",
-	"password": "password"
-}
 
 ***  
 
@@ -24,15 +12,15 @@ URL: https://buildweek-essentialism.herokuapp.com/
 
 #### Register (also signs them in)
 * POST /api/users/register
-> SEND: username and password
+> SEND: email and password
 
-> RETURNS: username and token
+> RETURNS: email and token
 
 #### Login
 * POST /api/users/login
-> SEND: username, password
+> SEND: email, password, name
 
-> RETURNS: username and token
+> RETURNS: email and token
 
 #### USERS (this endpoint will be removed for final project)
 * GET /api/users/
