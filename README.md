@@ -14,7 +14,7 @@ URL: https://buildweek-essentialism.herokuapp.com/
 * POST /api/users/register
 > SEND: email, password, name
 
-> RETURNS: email and token
+> RETURNS: id, message, token
 
 #### Login
 * POST /api/users/login
