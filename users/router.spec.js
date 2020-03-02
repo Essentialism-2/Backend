@@ -54,7 +54,7 @@ describe('API LOGIN / REGISTER Functionality', () => {
         return request(server)
         .delete(`/api/users/${testId}`)
         .then(res => {
-            expect(res.body).toBe(1);
+            expect(res.body.message).toBe(`User ${testId} successfully deleted`);
         })
     })
 

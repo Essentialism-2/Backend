@@ -71,10 +71,13 @@ router.post('/login', (req, res) => {
   });
 
   router.delete('/:id', (req, res) => {
-    console.log(req.params.id)
     Users.remove(req.params.id)
       .then(deleted => {
-        res.status(200).json(deleted)
+        if(deleted = 1) {
+          res.status(200).json({ message: `User ${req.params.id} successfully deleted`})
+        } else {
+          res.status(200).json({ message: `User does not exist`})
+        }
       })
       .catch(err => {
         res.status(500).json({ error: "Could not delete user" })
