@@ -26,20 +26,19 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    console.log(req.body)
+
     Values.addValue(req.body)
         .then(value => {
             res.status(200).json(value);
         })
         .catch(err => {
-            res.status(500).json({ error: "could not add value" })
+            res.status(500).json({ error: err })
         })
-
 })
 
 
 router.get('/user/:id', (req, res) => {
-    console.log(req.params.id)
+
     Values.valuesForUser(req.params.id)
         .then(usersValues => {
             res.status(200).json(usersValues)
@@ -58,6 +57,22 @@ router.post('/user/:id', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({ error: "Could not add value to user" })
+        })
+})
+
+router.delete('/:id', (req, res) => {
+
+    Values.remove(req.params.id)
+        .then(deleted => {
+            if(deleted = 1) {
+                res.status(200).json({ message: `Value ${req.params.id} successfully deleted`})
+              } else {
+                res.status(200).json({ message: `Value does not exist`})
+              }
+            res.status(200).json(deleted);
+        })
+        .catch(err => {
+            res.status(500).json({  message: "Could not delete Value", error: err })
         })
 })
 

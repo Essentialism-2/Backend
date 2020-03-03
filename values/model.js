@@ -5,7 +5,8 @@ module.exports = {
     findValue,
     addValue,
     valuesForUser,
-    addValueToUser
+    addValueToUser,
+    remove
 }
 
 function all() {
@@ -36,4 +37,10 @@ function addValueToUser(id, value_id, description){
             value_id: value_id,
             description: description
         })
+}
+
+function remove(id) {
+    return db('values')
+        .where({id})
+        .del()
 }
