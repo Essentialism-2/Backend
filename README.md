@@ -53,6 +53,10 @@ URL: https://buildweek-essentialism.herokuapp.com/
 
 >RETURNS: value_id, description
 
+* POST /api/values/delete/:id - (detaches value from user)
+>SEND: value_id
+
+
 * GET api/values/user/:id - (Gets Values for User)
 >RETURNS: Value_Id, Value_name, Value_description, User_id, Top_Three, User_Description
 
