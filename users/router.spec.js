@@ -145,7 +145,7 @@ describe('API functionality for Values Data', () => {
             "top_three": true
         })
         .then(res => {
-            expect(res.body).toBe(1);
+            expect(res.body.message).toBe(`Value 1 successfully edited from user ${testId}`);
         })
     })
 

@@ -63,11 +63,15 @@ router.put('/user/:id', (req, res) => {
     const { value_id, top_three, description } = req.body;
 
     Values.editUsersValues(req.params.id, value_id, top_three, description)
-        .then(editedUserValue => {
-            res.status(200).json(editedUserValue)
-        })
+    .then(editedUserValue => {
+        if(editedUserValue = 1) {
+            res.status(200).json({ message: `Value ${req.body.value_id} successfully edited from user ${req.params.id}`})
+        } else {
+            res.status(200).json({ message: 'Could not edit that value'})
+        }
+    })
         .catch(err => {
-            res.status(500).json({ error: "Could not edit value for user" })
+            res.status(500).json({ error: "Could not edit value for user" , err})
         })
 })
 

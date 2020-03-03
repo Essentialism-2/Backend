@@ -53,6 +53,10 @@ URL: https://buildweek-essentialism.herokuapp.com/
 
 >RETURNS: value_id, description
 
+* PUT /api/values/user/:id - (Updates value for user)
+>SEND: value_id, description(optional), top_three(true or false -optional)
+
+
 * POST /api/values/delete/:id - (detaches value from user)
 >SEND: value_id
 
