@@ -55,14 +55,42 @@ URL: https://buildweek-essentialism.herokuapp.com/
 
 * PUT /api/values/user/:id - (Updates value for user)
 >SEND: value_id, description(optional), top_three(true or false -optional)
-
+{
+	"value_id": "11",
+	"top_three": true
+}
 
 * POST /api/values/delete/:id - (detaches value from user)
 >SEND: value_id
 
 
 * GET api/values/user/:id - (Gets Values for User)
->RETURNS: Value_Id, Value_name, Value_description, User_id, Top_Three, User_Description
+>RETURNS: value_Id, value_name, value_description, user_id, top_three, user_description
 
 ***
 
+### The following endpoints are available for **PROJECTS Router**
+##### These endpoints require a token for authentication
+
+
+* GET /api/projects - (list all projects for that user)
+> RETURNS: list of projects
+
+* POST api/projects - (adds project for that user)
+
+>SEND:  
+{
+	"name": "another test project",
+	"description": "test description"
+}
+
+> RETURNS: id of the project created
+
+* DELETE api/projects - (deletes a project for that user)
+
+>SEND:  
+{
+	"project_id": "10"
+}
+
+> RETURNS: 1 (if successful)

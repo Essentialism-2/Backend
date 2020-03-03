@@ -182,3 +182,50 @@ describe('API functionality for Values Data', () => {
 
 })
 
+describe('Tests for Projects', () => {
+
+
+    it('Should register a user', () => {
+        return request(server)
+        .post('/api/users/register')
+        .send({ email: testEmail, password: 'password', name: testName})
+        .then(res => {
+            testId = res.body.id;
+            testToken = res.body.token;
+            expect(res.body.message).toBe(`Welcome ${testName}`);
+        })
+    })
+
+    it('get projects for user', () => {
+        return request(server)
+        .get(`/api/projects`)
+        .set('authorization', testToken)
+        .then(res => {
+            expect(Array.isArray(res.body)).toBe(true);
+        })
+    })
+
+    it('Adds project for user', () => {
+        return request(server)
+        .post(`/api/projects/`)
+        .set('authorization', testToken)
+        .send({
+            name: "another test project",
+            description: "test description"
+        })
+        .then(res => {
+            expect(Array.isArray(res.body)).toBe(true);
+        })
+    })
+
+    // it('Should delete the user', () => {
+    //     return request(server)
+    //     .delete(`/api/users/${testId}`)
+    //     .then(res => {
+    //         console.log(res.body)
+    //         console.log(testId)
+    //         expect(res.body.message).toBe(`User ${testId} successfully deleted`);
+    //     })
+    // })
+
+})

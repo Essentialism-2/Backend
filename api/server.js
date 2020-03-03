@@ -8,6 +8,7 @@ const authenticate = require('./authenticate-middleware');
 
 const usersRouter = require('../users/router');
 const valuesRouter = require('../values/router');
+const projectsRouter = require('../projects/router');
 
 const server = express();
 
@@ -20,6 +21,8 @@ server.use(helmet());
 //routes
 server.use('/api/users', usersRouter);
 server.use('/api/values', authenticate, valuesRouter);
+server.use('/api/projects', authenticate, projectsRouter);
+server.use('/api/projects', authenticate, projectsRouter);
 
 server.get('/', (req, res) => {
     res.status(200).json({ api: "up"})
