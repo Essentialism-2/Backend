@@ -109,6 +109,7 @@ describe('API functionality for Values Data', () => {
             expect(res.body[0].id).toBe(testValueId[0]);
         })
     })
+    
 
     it('should add value to a user', () => {
         return request(server)
@@ -130,6 +131,21 @@ describe('API functionality for Values Data', () => {
         .set('authorization', testToken)
         .then(res => {
             expect(res.body[0].User_Description).toBe('i want to explore the world of music');
+        })
+    })
+
+
+    it('should edit a value for a user', () => {
+        return request(server)
+        .put(`/api/values/user/${testId}`)
+        .set('authorization', testToken)
+        .send({            
+            "value_id": 1,
+            "description": "i want to explore the world of music",
+            "top_three": true
+        })
+        .then(res => {
+            expect(res.body).toBe(1);
         })
     })
 

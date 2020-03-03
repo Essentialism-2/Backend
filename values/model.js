@@ -7,6 +7,7 @@ module.exports = {
     valuesForUser,
     addValueToUser,
     removeValueFromUser,
+    editUsersValues,
     remove
 }
 
@@ -46,9 +47,15 @@ function removeValueFromUser(id, value_id) {
         .del()
 }
 
+function editUsersValues(id, value_id, top_three, description) {
+    return db('users_values')
+    .where({ user_id: id, value_id: value_id })
+    .update({top_three: top_three, description: description})
+}
 
 function remove(id) {
     return db('values')
         .where({id})
         .del()
 }
+

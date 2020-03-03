@@ -59,6 +59,18 @@ router.post('/user/:id', (req, res) => {
         })
 })
 
+router.put('/user/:id', (req, res) => {
+    const { value_id, top_three, description } = req.body;
+
+    Values.editUsersValues(req.params.id, value_id, top_three, description)
+        .then(editedUserValue => {
+            res.status(200).json(editedUserValue)
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Could not edit value for user" })
+        })
+})
+
 router.delete('/delete/:id', (req, res) => {
     const { value_id, description } = req.body;
         Values.removeValueFromUser(req.params.id, req.body.value_id)
