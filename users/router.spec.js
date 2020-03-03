@@ -53,9 +53,34 @@ describe('API LOGIN / REGISTER Functionality', () => {
         })
     })
 
+    it('Should delete the user', () => {
+        return request(server)
+        .delete(`/api/users/${testId}`)
+        .then(res => {
+            console.log(testId)
+            console.log(res.body)
+            expect(res.body.message).toBe(`User ${testId} successfully deleted`);
+        })
+    })
+})
+
 
 
 describe('API functionality for Values Data', () => {
+
+
+    it('Should register a user', () => {
+        return request(server)
+        .post('/api/users/register')
+        .send({ email: testEmail, password: 'password', name: testName})
+        .then(res => {
+            testId = res.body.id;
+            testToken = res.body.token;
+            expect(res.body.message).toBe(`Welcome ${testName}`);
+        })
+    })
+
+
     it('Should get a list of values', () => {
         return request(server)
         .get(`/api/values`)
@@ -72,7 +97,6 @@ describe('API functionality for Values Data', () => {
         .send({name: testValueName, description: 'description for test value'})
         .then(res => {
             testValueId = res.body
-            console.log(res.body)
             expect(Array.isArray(res.body)).toBe(true);
         })
     })
@@ -82,7 +106,6 @@ describe('API functionality for Values Data', () => {
         .get(`/api/values/${testValueId}`)
         .set('authorization', testToken)
         .then(res => {
-            console.log(res.body)
             expect(res.body[0].id).toBe(testValueId[0]);
         })
     })
@@ -92,13 +115,11 @@ describe('API functionality for Values Data', () => {
         .post(`/api/values/user/${testId}`)
         .set('authorization', testToken)
         .send({            
-            "value_id": testValueId,
+            "value_id": 1,
             "description": "i want to explore the world of music"
         })
-
         .then(res => {
-            console.log(res.body)
-            expect(res.body).toBe(1);
+            expect(res.body.description).toBe('i want to explore the world of music');
         })
     })
 
@@ -108,8 +129,7 @@ describe('API functionality for Values Data', () => {
         .get(`/api/values/user/${testId}`)
         .set('authorization', testToken)
         .then(res => {
-            console.log(res.body)
-            expect(Array.isArray(res.body)).toBe(true);
+            expect(res.body[0].User_Description).toBe('i want to explore the world of music');
         })
     })
 
@@ -120,19 +140,19 @@ describe('API functionality for Values Data', () => {
         .delete(`/api/values/${testValueId}`)
         .set('authorization', testToken)
         .then(res => {
-            console.log(res.body.message)
             expect(res.body.message).toBe(`Value ${testValueId} successfully deleted`);
         })
     })
 
+    // it('Should delete the user', () => {
+    //     return request(server)
+    //     .delete(`/api/users/${testId}`)
+    //     .then(res => {
+    //         console.log(testId)
+    //         console.log(res.body)
+    //         expect(res.body.message).toBe(`User ${testId} successfully deleted`);
+    //     })
+    // })
 
 })
 
-// it('Should delete the user', () => {
-//     return request(server)
-//     .delete(`/api/users/${testId}`)
-//     .then(res => {
-//         expect(res.body.message).toBe(`User ${testId} successfully deleted`);
-//     })
-// })
-})
