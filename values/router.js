@@ -22,7 +22,6 @@ router.get('/:id', (req, res) => {
         .catch(err => {
             res.status(500).json({ error: "could not that value" })
         })
-
 })
 
 router.post('/', (req, res) => {
@@ -60,8 +59,23 @@ router.post('/user/:id', (req, res) => {
         })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
+    const { value_id, description } = req.body;
+        Values.removeValueFromUser(req.params.id, req.body.value_id)
+            .then(deleted => {
+                if(deleted = 1) {
+                    res.status(200).json({ message: `Value ${req.body.value_id} successfully removed from user ${req.params.id}`})
+                } else {
+                    res.status(200).json({ message: 'User does not have that value'})
+                }
+            })
+            .catch(err => {
+                res.status(500).json({ error: 'Could not delete', err})
+            })
+})
 
+
+router.delete('/:id', (req, res) => {
     Values.remove(req.params.id)
         .then(deleted => {
             if(deleted = 1) {

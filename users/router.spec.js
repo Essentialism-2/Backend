@@ -143,16 +143,26 @@ describe('API functionality for Values Data', () => {
             expect(res.body.message).toBe(`Value ${testValueId} successfully deleted`);
         })
     })
+    
+    it('should Remove value from user', () => {
+        return request(server)
+        .delete(`/api/values/delete/${testId}`)
+        .set('authorization', testToken)
+        .send({            
+            "value_id": 1,
+        })
+        .then(res => {
+            expect(res.body.message).toBe(`Value 1 successfully removed from user ${testId}`);
+        })
+    })
 
-    // it('Should delete the user', () => {
-    //     return request(server)
-    //     .delete(`/api/users/${testId}`)
-    //     .then(res => {
-    //         console.log(testId)
-    //         console.log(res.body)
-    //         expect(res.body.message).toBe(`User ${testId} successfully deleted`);
-    //     })
-    // })
+    it('Should delete the user', () => {
+        return request(server)
+        .delete(`/api/users/${testId}`)
+        .then(res => {
+            expect(res.body.message).toBe(`User ${testId} successfully deleted`);
+        })
+    })
 
 })
 

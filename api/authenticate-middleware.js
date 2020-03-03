@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
       }
     })
   } else {
-    res.status(400).json({ message: "No credentias provided" })
+    res.status(400).json({ message: "No credentials provided" })
   }
 
 };
