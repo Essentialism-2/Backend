@@ -60,7 +60,7 @@ URL: https://buildweek-essentialism.herokuapp.com/
 	"top_three": true
 }
 
-* POST /api/values/delete/:id - (detaches value from user)
+* DELETE /api/values/delete/:id - (detaches value from user)
 >SEND: value_id
 
 
