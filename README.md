@@ -86,6 +86,17 @@ URL: https://buildweek-essentialism.herokuapp.com/
 
 > RETURNS: id of the project created
 
+* PUT api/projects - (edits project for that user)
+
+>SEND:  
+{
+	"id": "3" (id of project)
+	"name": "edited name",
+	"description": "edited description"
+}
+
+> RETURNS: 1 if successfully edited, 0 if failed;
+
 * DELETE api/projects - (deletes a project for that user)
 
 >SEND:  
@@ -94,3 +105,30 @@ URL: https://buildweek-essentialism.herokuapp.com/
 }
 
 > RETURNS: 1 (if successful)
+
+
+* POST api/projects/value - (attaches value to project)
+
+>SEND:  
+{
+	project_id: 3,
+	values_id: 1,
+}
+
+* PUT api/projects/value - (edits value to project relevance)
+
+>SEND:  
+{
+	project_id: 3,
+	values_id: 1,
+	relevant: true
+}
+
+* DELETE api/projects/value - (Removed value from project)
+
+>SEND:  
+{
+	project_id: 3,
+	values_id: 1
+}
+

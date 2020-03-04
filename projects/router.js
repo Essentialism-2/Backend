@@ -50,7 +50,7 @@ router.post('/value', (req, res) => {
 
     Projects.addValueToProject(project_id, values_id, relevant)
         .then(projectValueAdded => {
-            res.status(200).json({ message: `Successfully inserted added value to project` })
+            res.status(200).json({ message: `Successfully added value to project` })
         })
         .catch(err => {
             res.status(500).json({ error: "Could not add value to project", err })
