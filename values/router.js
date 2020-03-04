@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
 
 router.get('/user/:id', (req, res) => {
 
-    Values.valuesForUser(req.params.id)
+    Values.valuesForUser(req.decodedToken.subject)
         .then(usersValues => {
             res.status(200).json(usersValues)
         })
