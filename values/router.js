@@ -62,10 +62,10 @@ router.post('/user/:id', (req, res) => {
 router.put('/user/:id', (req, res) => {
     const { value_id, top_three, description } = req.body;
 
-    Values.editUsersValues(req.params.id, value_id, top_three, description)
+    Values.editUsersValues(req.decodedToken.subject, value_id, top_three, description)
     .then(editedUserValue => {
         if(editedUserValue = 1) {
-            res.status(200).json({ message: `Value ${req.body.value_id} successfully edited from user ${req.params.id}`})
+            res.status(200).json({ message: `Value ${req.body.value_id} successfully edited from user ${req.decodedToken.subject}`})
         } else {
             res.status(200).json({ message: 'Could not edit that value'})
         }
