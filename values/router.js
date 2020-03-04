@@ -50,7 +50,7 @@ router.get('/user/:id', (req, res) => {
 router.post('/user/:id', (req, res) => {
     const { value_id, description } = req.body;
 
-    Values.addValueToUser(req.params.id, value_id, description)
+    Values.addValueToUser(req.decodedToken.subject, value_id, description)
         .then(userValueAdded => {
             res.status(200).json(req.body)
         })
