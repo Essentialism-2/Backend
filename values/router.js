@@ -77,7 +77,7 @@ router.put('/user/:id', (req, res) => {
 
 router.delete('/delete/:id', (req, res) => {
     const { value_id, description } = req.body;
-        Values.removeValueFromUser(req.params.id, req.body.value_id)
+        Values.removeValueFromUser(req.decodedToken.subject, req.body.value_id)
             .then(deleted => {
                 if(deleted = 1) {
                     res.status(200).json({ message: `Value ${req.body.value_id} successfully removed from user ${req.params.id}`})
