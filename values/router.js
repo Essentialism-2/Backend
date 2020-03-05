@@ -55,7 +55,17 @@ router.post('/user/:id', (req, res) => {
             res.status(200).json(req.body)
         })
         .catch(err => {
+
+            Values.editUsersValues(req.decodedToken.subject, value_id, top_three)
+                .then(edited => {
+                    res.status(200).json({ message: "Value edited to true" })
+                })
+                 .catch(err => {
+                     res.status(500).json({ err: 'Could not edit user value to true', err})
+                 })
+
             res.status(500).json({ error: "Could not add value to user" })
+
         })
 })
 
