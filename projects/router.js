@@ -7,11 +7,29 @@ const Projects = require('./model');
 
 router.get('/', (req, res) => {
     Projects.all(req.decodedToken.subject)
+        .then( projects => {
+            Projects.projectsValues(req.decodedToken.subject)
+                .then( values => {
+                    
+                    
+                    // res.status(200).json({...projects, values: values});
+                    res.status(200).json(projects.map(project => project = {...project, values: values.filter(value => value.project_id === project.id)}));
+                })
+
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Could not get projects" })
+        })
+    });
+
+router.get('/value/:id', (req, res) => {
+    let project = req.params.id;
+    Projects.projectsValues(req.decodedToken.subject, project)
         .then(values => {
             res.status(200).json(values);
         })
         .catch(err => {
-            res.status(500).json({ error: "Could not get projects" })
+            res.status(500).json({ error: "Could not get project values" })
         })
     });
 

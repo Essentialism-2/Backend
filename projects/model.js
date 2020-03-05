@@ -2,6 +2,7 @@ const db = require('../database/db-config');
 
 module.exports = {
     all,
+    projectsValues,
     addProject,
     editProject,
     removeProject,
@@ -12,8 +13,16 @@ module.exports = {
 
 function all(id) {
     return db('projects')
+    // .join('projects_values as v','v.project_id','p.id')
     .where({user_id: id})
 }
+
+function projectsValues(id, project) {
+    return db('projects as p')
+    .join('projects_values as v','v.project_id','p.id')
+    .where({user_id: id})
+}
+
 
 function addProject(id, project){
     project.user_id = id;
