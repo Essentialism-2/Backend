@@ -3,7 +3,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgresql://localhost/essentialism',
+    connection: 'postgresql://localhost/essentialism2',
     pool: {
       min: 2,
       max: 10

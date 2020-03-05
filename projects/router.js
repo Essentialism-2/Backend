@@ -54,12 +54,28 @@ router.put('/', (req, res) => {
     });
 
 router.delete('/', (req, res) => {
+    
+    
     Projects.removeProject(req.decodedToken.subject, req.body.project_id)
-        .then(deleted => {
-            res.status(200).json(deleted)
-        })
-        .catch(err => {
-            res.status(500).json({ error: "Could not delete project"})
+    .then(deleted => {
+        res.status(200).json(deleted)
+    })
+    .catch(err => {
+        Projects.removeAllProjectsValues(req.body.project_id)
+            .then(removed => {
+                Projects.removeProject(req.decodedToken.subject, req.body.project_id)
+                    .then(secondTryDelete => {
+                        res.status(200).json(secondTryDelete);
+                    })
+                    .catch(err => {
+                        res.status(500).json(err)
+                    })
+            })
+            .catch(err => {
+                res.status(500).json(err)
+            })
+
+            // res.status(500).json({ error: "Could not delete project"})
         })
 })
 

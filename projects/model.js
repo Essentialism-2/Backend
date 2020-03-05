@@ -8,7 +8,8 @@ module.exports = {
     removeProject,
     addValueToProject,
     editValueToProject,
-    removeValueFromProject
+    removeValueFromProject,
+    removeAllProjectsValues
 }
 
 function all(id) {
@@ -34,6 +35,13 @@ function editProject(id, project){
     return db('projects')
     .where({user_id: id, id: project.id})
     .update({description: project.description, name: project.name})
+}
+
+function removeAllProjectsValues(project_id){
+    console.log(project_id)
+    return db('projects_values')
+    .where({project_id: project_id})
+    .del()
 }
 
 function removeProject(user, project_id) {
