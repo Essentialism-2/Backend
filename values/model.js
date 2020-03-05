@@ -32,12 +32,13 @@ function valuesForUser(id){
     .where({user_id: id})
 }
 
-function addValueToUser(id, value_id, description){
+function addValueToUser(id, value_id, description, top_three){
     return db('users_values')
         .insert({
             user_id: id,
             value_id: value_id,
-            description: description
+            description: description,
+            top_three: top_three
         })
 }
 
