@@ -11,9 +11,41 @@ router.get('/', (req, res) => {
             Projects.projectsValues(req.decodedToken.subject)
                 .then( values => {
                     
-                    
+                    Projects.topThreeValuesForUser(req.decodedToken.subject)
+                        .then( topThreeValues => {
+                            let topThreeValuesData;
+                            let testingValues;
+                            let projectValues;
+                            
+                            topThreeValuesData = topThreeValues;
+                            projectValues = projects.map(project => project = values.filter(value => value.project_id === project.id))
+                            // console.log(projectValues[0])
+                            projectValues = projectValues[0]
+                            
+                            console.log(projectValues)
+                            console.log(topThreeValuesData)
+                            // projectValues = projectValues.map(project =>   project = {...project, newthing: })
+                            for(var i = 0; i < projectValues.length; i++){
+                                let matches = false;
+                                topThreeValues
+                                for(var j = 0; j < topThreeValues.length; j++){
+
+                                    if(projectValues[i].values_id === topThreeValues[j].Value_Id) {
+                                        matches = true
+                                    }
+                                }
+                                projectValues[i] = {...projectValues[i], matchesTopThree: matches}
+                            }
+
+                            // testingValues =  projects.map(project => project = {...project, testThing: testingValues, topThreeValues: topThreeValues , values: projects.map(project => project = {...project, testThing: testingValues, topThreeValues: topThreeValues , values: values.filter(value => value.project_id === project.id)})});
+                            res.status(200).json(projects.map(project => project = {...project, testThing: testingValues, topThreeValues: topThreeValues , projectValues}));
+                            res.status(200).json(testingValues);
+
+                        })
+                        .catch(err => {
+                            res.status(500).json({ error: "didnt work dude 😳"})
+                        })
                     // res.status(200).json({...projects, values: values});
-                    res.status(200).json(projects.map(project => project = {...project, values: values.filter(value => value.project_id === project.id)}));
                 })
 
         })
@@ -22,9 +54,9 @@ router.get('/', (req, res) => {
         })
     });
 
-router.get('/value/:id', (req, res) => {
-    let project = req.params.id;
-    Projects.projectsValues(req.decodedToken.subject, project)
+router.get('/values/', (req, res) => {
+    // let project = req.params.id;
+    Projects.projectsValues(req.decodedToken.subject, req.params.id)
         .then(values => {
             res.status(200).json(values);
         })
@@ -115,5 +147,17 @@ router.delete('/value', (req, res) => {
         })
 })
 
+
+// router.get('/topthree', (req, res) => {
+//     Projects.topThreeValuesForUser(req.decodedToken.subject)
+//         .then( projects => {
+           
+//                     res.status(200).json(projects);
+
+//         })
+//         .catch(err => {
+//             res.status(500).json({ error: "didnt work bro. 😳" })
+//         })
+//     });
 
 module.exports = router;

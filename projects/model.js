@@ -9,7 +9,8 @@ module.exports = {
     addValueToProject,
     editValueToProject,
     removeValueFromProject,
-    removeAllProjectsValues
+    removeAllProjectsValues,
+    topThreeValuesForUser
 }
 
 function all(id) {
@@ -71,4 +72,11 @@ function removeValueFromProject(project_id, values_id){
     return db('projects_values')
         .where({project_id: project_id, values_id: values_id})
         .del()
+}
+
+function topThreeValuesForUser(id){
+    return db('values as v')
+    .select('v.id as Value_Id', 'v.name as Value_name','v.description as Value_description')
+    .join('users_values as u','u.value_id','v.id')
+    .where({user_id: id, top_three: true})
 }
