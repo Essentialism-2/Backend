@@ -29,7 +29,7 @@ var corsOptionsDelegate = function (req, callback) {
 server.use(express.json());
 server.use(cors(corsOptionsDelegate)); 
 server.use(helmet());
-app.use(function (req, res, next) {
+server.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'https://essentialism.teagueteam.now.sh');
