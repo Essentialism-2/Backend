@@ -8,6 +8,8 @@ let testToken;
 let testValueId;
 let testValueName = `Test Value_${Date.now()}`;
 
+let projectId;
+
 
 describe('API LOGIN / REGISTER Functionality', () => {
     it('Should run a test', () => {
@@ -172,29 +174,29 @@ describe('API functionality for Values Data', () => {
         })
     })
 
-    it('Should delete the user', () => {
-        return request(server)
-        .delete(`/api/users/${testId}`)
-        .then(res => {
-            expect(res.body.message).toBe(`User ${testId} successfully deleted`);
-        })
-    })
+    // it('Should delete the user', () => {
+    //     return request(server)
+    //     .delete(`/api/users/${testId}`)
+    //     .then(res => {
+    //         expect(res.body.message).toBe(`User ${testId} successfully deleted`);
+    //     })
+    // })
 
 })
 
 describe('Tests for Projects', () => {
 
 
-    it('Should register a user', () => {
-        return request(server)
-        .post('/api/users/register')
-        .send({ email: testEmail, password: 'password', name: testName})
-        .then(res => {
-            testId = res.body.id;
-            testToken = res.body.token;
-            expect(res.body.message).toBe(`Welcome ${testName}`);
-        })
-    })
+    // it('Should register a user', () => {
+    //     return request(server)
+    //     .post('/api/users/register')
+    //     .send({ email: testEmail, password: 'password', name: testName})
+    //     .then(res => {
+    //         testId = res.body.id;
+    //         testToken = res.body.token;
+    //         expect(res.body.message).toBe(`Welcome ${testName}`);
+    //     })
+    // })
 
     it('get projects for user', () => {
         return request(server)
@@ -214,9 +216,41 @@ describe('Tests for Projects', () => {
             description: "test description"
         })
         .then(res => {
+            projectId = res.body[0]
+            // console.log(projectId)
             expect(Array.isArray(res.body)).toBe(true);
         })
     })
+
+    // let deleteThis = {project_id: project};
+    // axiosWithAuth()
+    //     .delete('/projects', {data: deleteThis})
+
+    // it('Deletes project for user', () => {
+    //     return request(server)
+    //     .delete(`/api/projects`)
+    //     .set('authorization', testToken)
+    //     .send({data:{
+    //         project_id: projectId
+    //     }})
+    //     .then(res => {
+    //         console.log(res.body)
+    //         expect(res.body).toBe('hi');
+    //     })
+    // })
+
+    // it('Removes value from project', () => {
+    //     return request(server)
+    //     .delete(`/api/projects/value`)
+    //     .set('authorization', testToken)
+    //     // {data: {project_id: project, values_id: value}
+    //     .send({data:{
+    //         project_id: project, values_id: value
+    //     }})
+    //     .then(res => {
+    //         expect(Array.isArray(res.body)).toBe(true);
+    //     })
+    // })
 
     // it('Should delete the user', () => {
     //     return request(server)

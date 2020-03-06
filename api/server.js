@@ -13,28 +13,29 @@ const projectsRouter = require('../projects/router');
 const server = express();
 
 
-var whitelist = ['http://localhost:3000', 'https://essentialism.teagueteam.now.sh/', 'https://buildweek-essentialism.herokuapp.com/']
-var corsOptionsDelegate = function (req, callback) {
-	var corsOptions;
-	if (whitelist.indexOf(req.header('Origin')) !== -1) {
-		corsOptions = { credentials: true, origin: true } // reflect (enable) the requested origin in the CORS response
-	} else {
-		corsOptions = { origin: false } // disable CORS for this request
-	}
-  		callback(null, corsOptions) // callback expects two parameters: error and options
-}
+// var whitelist = ['http://localhost:3000', 'https://essentialism.teagueteam.now.sh/', 'https://buildweek-essentialism.herokuapp.com/']
+// var corsOptionsDelegate = function (req, callback) {
+// 	var corsOptions;
+// 	if (whitelist.indexOf(req.header('Origin')) !== -1) {
+// 		corsOptions = { credentials: true, origin: true } // reflect (enable) the requested origin in the CORS response
+// 	} else {
+// 		corsOptions = { origin: false } // disable CORS for this request
+// 	}
+//   		callback(null, corsOptions) // callback expects two parameters: error and options
+// }
 // server.use(cors(corsOptionsDelegate));
 
 //middleware
 server.use(express.json());
-server.use(cors(corsOptionsDelegate)); 
+// server.use(cors(corsOptionsDelegate)); 
+server.use(cors()); 
 server.use(helmet());
-server.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-	res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-	res.header('Content-Type', 'application/json');
-    next();
-  });
+// server.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+// 	res.header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+// 	res.header('Content-Type', 'application/json');
+//     next();
+//   });
 
 
 //routes

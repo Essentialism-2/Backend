@@ -77,14 +77,14 @@ router.delete('/', (req, res) => {
     
     Projects.removeProject(req.decodedToken.subject, req.body.project_id)
     .then(deleted => {
-        res.status(200).json(deleted)
+        res.status(200).json({ message: 'it deleted', deleted})
     })
     .catch(err => {
         Projects.removeAllProjectsValues(req.body.project_id)
             .then(removed => {
                 Projects.removeProject(req.decodedToken.subject, req.body.project_id)
                     .then(secondTryDelete => {
-                        res.status(200).json(secondTryDelete);
+                        res.status(200).json({message: 'deleted'});
                     })
                     .catch(err => {
                         res.status(500).json(err)
