@@ -21,7 +21,8 @@ function all(id) {
 
 function projectsValues(id, project) {
     return db('projects as p')
-    .join('projects_values as v','v.project_id','p.id')
+    .join('projects_values as pv','pv.project_id','p.id')
+    .join('values as v','v.id','pv.values_id')
     .where({user_id: id})
 }
 

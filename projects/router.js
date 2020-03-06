@@ -10,64 +10,29 @@ router.get('/', (req, res) => {
         .then( projects => {
             Projects.projectsValues(req.decodedToken.subject)
                 .then( values => {
-                    
                     Projects.topThreeValuesForUser(req.decodedToken.subject)
                         .then( topThreeValues => {
                             let topThreeValuesData;
                             let testingValues;
                             let projectValues;
-                            
                             topThreeValuesData = topThreeValues;
-                            
                             projectValues = values;
-                            // projectValues = projects.map(project => project = values.filter(value => value.project_id === project.id))
-                            // console.log(projectValues[0])
-                            // projectValues = projectValues[0]
-                            
-                            // console.log(projectValues)
-                            // console.log(topThreeValuesData)
-                            // projectValues = projectValues.map(project =>   project = {...project, newthing: })
-                            // for(var i = 0; i < projectValues.length; i++){
-                            //     let matches = false;
-                            //     // topThreeValues
-                            //     for(var j = 0; j < topThreeValues.length; j++){
-
-                            //         if(projectValues[i].values_id === topThreeValues[j].Value_Id) {
-                            //             matches = true
-                            //         }
-                            //     }
-                            //     projectValues[i] = {...projectValues[i], matchesTopThree: matches}
-                            // }
-                            // let projects= [];
                             for(var i = 0; i < projectValues.length; i++){
                                 let matches = false;
-                                // topThreeValues
                                 for(var j = 0; j < topThreeValues.length; j++){
-
                                     if(projectValues[i].values_id === topThreeValues[j].Value_Id) {
                                         matches = true
                                     }
-
                                 }
                                 projectValues[i] = {...projectValues[i], matchesTopThree: matches}
-
-                                // projectValues[i] = {...projectValues[i], matchesTopThree: matches}
-                                // projects[i] = {...projects[i], ...projectValues}
-                                // console.log(projects[i])
-                                // projects[i].values = ['here']
                             }
 
-                            // testingValues =  projects.map(project => project = {...project, testThing: testingValues, topThreeValues: topThreeValues , values: projects.map(project => project = {...project, testThing: testingValues, topThreeValues: topThreeValues , values: values.filter(value => value.project_id === project.id)})});
-                            // res.status(200).json(projects.map(project => project = {...project, testThing: testingValues,  projectValues}));
-                            // res.status(200).json(projects.map(project => project = {...project, testThing: testingValues,  values: values.filter(value => value.project_id === project.id)}));
                             res.status(200).json(projects.map(project => project = {...project, testThing: testingValues,  projectValues: projectValues.filter(value => value.project_id === project.id)}));
-                            // res.status(200).json(testingValues);
 
                         })
                         .catch(err => {
                             res.status(500).json({ error: "didnt work dude 😳"})
                         })
-                    // res.status(200).json({...projects, values: values});
                 })
 
         })
