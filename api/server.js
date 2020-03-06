@@ -13,7 +13,7 @@ const projectsRouter = require('../projects/router');
 const server = express();
 
 
-var whitelist = ['http://localhost:3000', 'https://essentialism.teagueteam.now.sh/']
+var whitelist = ['http://localhost:3000', 'https://essentialism.teagueteam.now.sh/', 'https://buildweek-essentialism.herokuapp.com/']
 var corsOptionsDelegate = function (req, callback) {
 	var corsOptions;
 	if (whitelist.indexOf(req.header('Origin')) !== -1) {
