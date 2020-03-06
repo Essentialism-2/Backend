@@ -12,9 +12,22 @@ const projectsRouter = require('../projects/router');
 
 const server = express();
 
+
+var whitelist = ['http://localhost:3000', 'https://essentialism.teagueteam.now.sh/']
+var corsOptionsDelegate = function (req, callback) {
+	var corsOptions;
+	if (whitelist.indexOf(req.header('Origin')) !== -1) {
+		corsOptions = { credentials: true, origin: true } // reflect (enable) the requested origin in the CORS response
+	} else {
+		corsOptions = { origin: false } // disable CORS for this request
+	}
+  		callback(null, corsOptions) // callback expects two parameters: error and options
+}
+// server.use(cors(corsOptionsDelegate));
+
 //middleware
 server.use(express.json());
-server.use(cors()); 
+server.use(cors(corsOptionsDelegate)); 
 server.use(helmet());
 
 
